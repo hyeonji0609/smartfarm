@@ -8,6 +8,7 @@ app = Flask(__name__)
 @app.route('/upload', methods=['POST'])
 def upload_image():
     image = request.data
+    device_id = request.headers.get('device-id')  # get id from header
     timestamp = time.strftime("%Y%m%d-%H%M%S")
 
     with open ("service_key.json", "r") as f:
@@ -17,6 +18,7 @@ def upload_image():
     client.upload_image(
         bucket_name='smartfarm_leafs',
         image=image,
+        device_id = device_id,
         timestamp=timestamp
     )
 

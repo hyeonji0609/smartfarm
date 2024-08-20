@@ -9,13 +9,13 @@ class GCSClient(object):
         credentials = Credentials.from_service_account_info(GCP_KEY_FILE)
         self.client = Client(credentials=credentials, project=credentials.project_id)
     
-    def upload_image(self, bucket_name, timestamp, image):
+    def upload_image(self, bucket_name, image, device_id, timestamp):
         try:
-            file_name = f'image_{timestamp}.jpg'
+            file_name = f'{device_id}_{timestamp}.jpg'
             image_stream = BytesIO(image)
 
             bucket = self.client.bucket(bucket_name)
-            blob = bucket.blob(file_name)
+            blob = bucket.blob(f"{device_id}/{file_name}")
             blob.upload_from_file(image_stream, content_type='image/jpeg')
             print(f"Image uploaded to GCP bucket as {file_name}")
 

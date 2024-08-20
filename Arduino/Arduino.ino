@@ -2,16 +2,10 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <time.h>
+#include "config.h"
 
 #define CAMERA_MODEL_AI_THINKER // Has PSRAM
 #include "camera_pins.h"
-
-// ===========================
-// Enter your WiFi credentials
-// ===========================
-const char *ssid = "*****";
-const char *password = "*****";
-const char* serverName = "*****";
 
 const char* ntpServer = "pool.ntp.org";
 const long gmtOffset_sec = 0;  // GMT 시간 오프셋 (한국은 GMT+9 이므로 32400초)
@@ -81,6 +75,7 @@ void loop() {
     HTTPClient http; // http 객체 생성
     http.begin(serverName); // http 요청 시작
     http.addHeader("Content-Type", "image/jpeg");
+    http.addHeader("device-id", deviceId);  // 고유 ID를 헤더에 추가
 
     Serial.println(WiFi.localIP()); // ESP32-CAM의 로컬 IP 주소 출력
     Serial.printf("Attempting to connect to server: %s\n", serverName);

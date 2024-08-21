@@ -1,3 +1,4 @@
 flask
+pymongo
 google-cloud-storage
 google-auth

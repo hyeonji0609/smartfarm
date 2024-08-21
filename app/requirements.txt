@@ -1,4 +1,5 @@
 flask
 pymongo
+celery # rabbitMQ
 google-cloud-storage
 google-auth

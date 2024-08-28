@@ -13,7 +13,7 @@ services:
   flask-app:
     build: .
     ports:
-      - "5001:5001"
+      - "13308:5001"
     environment:
       - FLASK_ENV=development
       - CELERY_BROKER_URL=pyamqp://guest@rabbitmq//

@@ -1,2 +1,3 @@
 /app/service_key.json
+/app/.env
 /Arduino/config.h
